@@ -1,0 +1,12 @@
+package com.acompletenoobsmoke.refresher;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface PersonDAO {
+
+    public List<Person> getPeople();
+    public Optional<Person> getPerson(Integer id);
+    public void insertPerson(Person person);
+    public void removePerson(Integer id);
+}
