@@ -2,9 +2,7 @@ package com.acompletenoobsmoke.refresher;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,8 +17,23 @@ public class PersonController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Person>> getPeople() {
-        return new ResponseEntity<>(personService.getPeople(), HttpStatus.OK);
+    public ResponseEntity<List<Person>> getPeople(@RequestParam(value = "sort", required = false, defaultValue = "ASC") SORT sort) {
+        return new ResponseEntity<>(personService.getPeople(sort), HttpStatus.OK);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Person> getPersonById(@PathVariable Integer id) {
+        return new ResponseEntity<>(personService.getPersonByID(id), HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Object> deletePersonById(@PathVariable Integer id) {
+        try {
+            personService.removePersonByID(id);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>("Person with id " + id + " was removed from database", HttpStatus.OK);
     }
 
 
