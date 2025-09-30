@@ -26,6 +26,13 @@ public class PersonController {
         return new ResponseEntity<>(personService.getPersonByID(id), HttpStatus.OK);
     }
 
+    @PostMapping
+    public ResponseEntity<Object> addPerson(@RequestBody Person person) {
+        personService.addPerson(person);
+        String message = person.firstName() + " " + person.lastName() + " added successfully!";
+        return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
     @DeleteMapping("{id}")
     public ResponseEntity<Object> deletePersonById(@PathVariable Integer id) {
         try {

@@ -6,19 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class PersonFakeRepo implements PersonDAO{
 
     private static List<Person> people = new ArrayList<>();
+    private static AtomicInteger id = new AtomicInteger(0);
 
     static {
-        people.add(new Person(1, "Osaretin", "Omofonmwan", 30, Gender.MALE));
-        people.add(new Person(2, "Victoria", "Marshall", 29, Gender.FEMALE));
-        people.add(new Person(3, "Adedayo", "Uwensuyi", 31, Gender.MALE));
-        people.add(new Person(4, "Ajinboye", "Uwensuyi", 33, Gender.MALE));
-        people.add(new Person(5, "Amenzee", "Omofonmwan", 40, Gender.FEMALE));
-        people.add(new Person(6, "Osato", "Omofonmwan", 45, Gender.FEMALE));
+        people.add(new Person(id.incrementAndGet(), "Osaretin", "Omofonmwan", 30, Gender.MALE));
+        people.add(new Person(id.incrementAndGet(), "Victoria", "Marshall", 29, Gender.FEMALE));
+        people.add(new Person(id.incrementAndGet(), "Adedayo", "Uwensuyi", 31, Gender.MALE));
+        people.add(new Person(id.incrementAndGet(), "Ajinboye", "Uwensuyi", 33, Gender.MALE));
+        people.add(new Person(id.incrementAndGet(), "Amenzee", "Omofonmwan", 40, Gender.FEMALE));
+        people.add(new Person(id.incrementAndGet(), "Osato", "Omofonmwan", 45, Gender.FEMALE));
     }
 
     public List<Person> getPeople() {
@@ -32,7 +34,8 @@ public class PersonFakeRepo implements PersonDAO{
 
     @Override
     public void insertPerson(Person person) {
-        people.add(person);
+        people.add(new Person(id.incrementAndGet(), person.firstName(),
+                person.lastName(), person.age(), person.gender()));
     }
 
     @Override

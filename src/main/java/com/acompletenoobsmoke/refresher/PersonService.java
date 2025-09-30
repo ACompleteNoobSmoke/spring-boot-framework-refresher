@@ -25,6 +25,10 @@ public class PersonService {
         return getPeople();
     }
 
+    public void addPerson(Person person) {
+        personDAO.insertPerson(person);
+    }
+
     public Person getPersonByID(Integer id) {
         return personDAO.getPerson(id).orElseThrow(() ->
                 new IllegalArgumentException("No person found with id: " + id));
