@@ -9,4 +9,5 @@ public interface PersonDAO {
     public Optional<Person> getPerson(Integer id);
     public void insertPerson(Person person);
     public void removePerson(Integer id);
+    public Optional<Person> updatePerson(int id, Person person);
 }

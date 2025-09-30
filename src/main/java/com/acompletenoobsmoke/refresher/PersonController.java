@@ -33,6 +33,15 @@ public class PersonController {
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<Object> updatePerson(@PathVariable Integer id, @RequestBody Person person) {
+        try {
+            return new ResponseEntity<>(personService.updatePerson(id, person), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @DeleteMapping("{id}")
     public ResponseEntity<Object> deletePersonById(@PathVariable Integer id) {
         try {

@@ -44,4 +44,20 @@ public class PersonFakeRepo implements PersonDAO{
         if (!person.isPresent()) { throw new RuntimeException("Person with id " + id + " does not exist"); }
         people.remove(person.get());
     }
+
+    @Override
+    public Optional<Person> updatePerson(int id, Person person) {
+        Optional<Person> optionalPerson = getPerson(id);
+        if (!optionalPerson.isPresent())
+            throw new RuntimeException("Person with id " + id+ " does not exist");
+        String firstName = person.firstName() != null && !person.firstName().isEmpty() &&
+                !person.firstName().equals(optionalPerson.get().firstName()) ? person.firstName() : optionalPerson.get().firstName();
+        String lastName = person.lastName() != null && !person.lastName().isEmpty() &&
+                !person.lastName().equals(optionalPerson.get().lastName()) ? person.lastName() : optionalPerson.get().lastName();
+        int age = (person.age() != 0 && person.age() != optionalPerson.get().age()) ? person.age() : optionalPerson.get().age();
+        people.removeIf(u -> u.id() == id);
+        people.add(new Person(id, firstName, lastName, age, optionalPerson.get().gender()));
+        return Optional.of(people.getLast());
+
+    }
 }

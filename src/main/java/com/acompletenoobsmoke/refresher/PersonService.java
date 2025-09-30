@@ -3,6 +3,7 @@ package com.acompletenoobsmoke.refresher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,6 +28,10 @@ public class PersonService {
 
     public void addPerson(Person person) {
         personDAO.insertPerson(person);
+    }
+
+    public Optional<Person> updatePerson(int id, Person person) {
+        return personDAO.updatePerson(id, person);
     }
 
     public Person getPersonByID(Integer id) {
