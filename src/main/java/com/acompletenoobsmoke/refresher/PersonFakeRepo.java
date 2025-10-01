@@ -58,6 +58,5 @@ public class PersonFakeRepo implements PersonDAO{
         people.removeIf(u -> u.id() == id);
         people.add(new Person(id, firstName, lastName, age, optionalPerson.get().gender()));
         return Optional.of(people.getLast());
-
     }
 }
