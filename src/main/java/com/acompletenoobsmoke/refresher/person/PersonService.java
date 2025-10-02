@@ -1,6 +1,6 @@
 package com.acompletenoobsmoke.refresher.person;
 
-import com.acompletenoobsmoke.refresher.SORT;
+import com.acompletenoobsmoke.refresher.util.SORT;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;

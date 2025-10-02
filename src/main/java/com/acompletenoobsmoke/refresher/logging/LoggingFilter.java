@@ -1,8 +1,7 @@
-package com.acompletenoobsmoke.refresher;
+package com.acompletenoobsmoke.refresher.logging;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
