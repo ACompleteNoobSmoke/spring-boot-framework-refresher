@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
@@ -29,13 +28,13 @@ public class PersonFakeRepo implements PersonDAO{
 
     @Override
     public Optional<Person> getPerson(Integer id) {
-        return people.stream().filter(u -> u.id() == id).findFirst();
+        return people.stream().filter(p -> id.equals(p.getId())).findFirst();
     }
 
     @Override
     public void insertPerson(Person person) {
-        people.add(new Person(id.incrementAndGet(), person.firstName(),
-                person.lastName(), person.age(), person.gender()));
+        people.add(new Person(id.incrementAndGet(), person.getFirstName(),
+                person.getLastName(), person.getAge(), person.getGender()));
     }
 
     @Override
@@ -50,13 +49,13 @@ public class PersonFakeRepo implements PersonDAO{
         Optional<Person> optionalPerson = getPerson(id);
         if (!optionalPerson.isPresent())
             throw new RuntimeException("Person with id " + id+ " does not exist");
-        String firstName = person.firstName() != null && !person.firstName().isEmpty() &&
-                !person.firstName().equals(optionalPerson.get().firstName()) ? person.firstName() : optionalPerson.get().firstName();
-        String lastName = person.lastName() != null && !person.lastName().isEmpty() &&
-                !person.lastName().equals(optionalPerson.get().lastName()) ? person.lastName() : optionalPerson.get().lastName();
-        int age = (person.age() != 0 && person.age() != optionalPerson.get().age()) ? person.age() : optionalPerson.get().age();
-        people.removeIf(u -> u.id() == id);
-        people.add(new Person(id, firstName, lastName, age, optionalPerson.get().gender()));
+        String firstName = person.getFirstName() != null && !person.getFirstName().isEmpty() &&
+                !person.getFirstName().equals(optionalPerson.get().getFirstName()) ? person.getFirstName() : optionalPerson.get().getFirstName();
+        String lastName = person.getLastName() != null && !person.getLastName().isEmpty() &&
+                !person.getLastName().equals(optionalPerson.get().getLastName()) ? person.getLastName() : optionalPerson.get().getLastName();
+        int age = (person.getAge() != 0 && person.getAge() != optionalPerson.get().getAge()) ? person.getAge() : optionalPerson.get().getAge();
+        people.removeIf(u -> u.id.equals(id));
+        people.add(new Person(id, firstName, lastName, age, optionalPerson.get().getGender()));
         return Optional.of(people.getLast());
     }
 }

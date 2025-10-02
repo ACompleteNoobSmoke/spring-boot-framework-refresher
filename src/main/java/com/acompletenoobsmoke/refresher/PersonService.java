@@ -2,9 +2,11 @@ package com.acompletenoobsmoke.refresher;
 
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 
 @Service
 public class PersonService {
@@ -21,9 +23,9 @@ public class PersonService {
 
     public List<Person> getPeople(SORT sort) {
         if (sort == SORT.DESC) {
-            return personDAO.getPeople().stream().sorted((a, b) -> b.id() - a.id()).toList();
+            return getPeople().stream().sorted(Comparator.comparing(Person::getId).reversed()).collect(Collectors.toList());
         }
-        return getPeople();
+        return getPeople().stream().sorted(Comparator.comparing(Person::getId)).collect(Collectors.toList());
     }
 
     public void addPerson(Person person) {

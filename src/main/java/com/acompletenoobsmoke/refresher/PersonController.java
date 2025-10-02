@@ -1,8 +1,5 @@
 package com.acompletenoobsmoke.refresher;
 
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +29,7 @@ public class PersonController {
     @PostMapping
     public ResponseEntity<Object> addPerson(@RequestBody Person person) {
         personService.addPerson(person);
-        String message = person.firstName() + " " + person.lastName() + " added successfully!";
+        String message = person.getFirstName() + " " + person.getLastName() + " added successfully!";
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
