@@ -18,7 +18,7 @@ public class PersonController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Person>> getPeople(@RequestParam(value = "sort", required = false, defaultValue = "ASC") SORT sort) {
+    public ResponseEntity<List<Person>> getPeople(@RequestParam(value = "sort", required = false, defaultValue = "ASC") String sort) {
         return new ResponseEntity<>(personService.getPeople(sort), HttpStatus.OK);
     }
 

@@ -22,8 +22,9 @@ public class PersonService {
         return personDAO.getPeople();
     }
 
-    public List<Person> getPeople(SORT sort) {
-        if (sort == SORT.DESC) {
+    public List<Person> getPeople(String sort) {
+        SORT sortecChoice = (sort != null && sort.toUpperCase().equals("DESC")) ? SORT.DESC : SORT.ASC;
+        if (sortecChoice == SORT.DESC) {
             return getPeople().stream().sorted(Comparator.comparing(Person::getId).reversed()).collect(Collectors.toList());
         }
         return getPeople().stream().sorted(Comparator.comparing(Person::getId)).collect(Collectors.toList());
