@@ -1,4 +1,4 @@
-package com.acompletenoobsmoke.refresher;
+package com.acompletenoobsmoke.refresher.person;
 
 public record PersonRecord(int id,
                            String firstName,

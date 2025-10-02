@@ -1,4 +1,4 @@
-package com.acompletenoobsmoke.refresher;
+package com.acompletenoobsmoke.refresher.person;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,6 +1,4 @@
-package com.acompletenoobsmoke.refresher;
-
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
+package com.acompletenoobsmoke.refresher.person;
 
 public class Person {
     public final Integer id;
