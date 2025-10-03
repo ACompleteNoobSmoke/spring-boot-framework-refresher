@@ -24,7 +24,7 @@ public class BookController {
     @GetMapping()
     public ResponseEntity<Object> getAllBooks() {
         try {
-            return new ResponseEntity<>(getAllBooks(), HttpStatus.OK);
+            return new ResponseEntity<>(bookService.getAllBooks(), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }

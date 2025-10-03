@@ -2,6 +2,7 @@ package com.acompletenoobsmoke.refresher.book;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -9,8 +10,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Repository
 public class BookFakeRepo implements BookDAO {
 
-    private List<Book> books;
-    private AtomicInteger bookID = new AtomicInteger(0);
+    private static List<Book> books;
+    private static AtomicInteger bookID = new AtomicInteger(0);
+
+    static {
+        books = new ArrayList<>();
+        books.add(new Book(bookID.getAndIncrement(), "The Stand", "Stephen King"));
+        books.add(new Book(bookID.getAndIncrement(), "GooseBumps", "R.L. Stine"));
+    }
 
     @Override
     public Optional<Book> getBookByID(Integer bookID) {
