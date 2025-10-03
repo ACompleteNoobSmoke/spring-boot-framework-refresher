@@ -2,6 +2,8 @@ package com.acompletenoobsmoke.refresher.book;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BookService {
 
@@ -9,6 +11,14 @@ public class BookService {
 
     public BookService(BookDAO bookDAO) {
         this.bookDAO = bookDAO;
+    }
+
+    public List<Book> getAllBooks() {
+        return bookDAO.getAllBooks().get();
+    }
+
+    public List<Book> getAllBooksForUser(Integer userID) {
+        return bookDAO.getAllBooksForUser(userID).get();
     }
 
     public Book getBookByID(Integer bookID) {
