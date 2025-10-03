@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Repository
 public class PersonFakeRepo implements PersonDAO{
 
-    private static List<Person> people = new ArrayList<>();
+    private static final List<Person> people = new ArrayList<>();
     private static AtomicInteger id = new AtomicInteger(0);
 
     static {
