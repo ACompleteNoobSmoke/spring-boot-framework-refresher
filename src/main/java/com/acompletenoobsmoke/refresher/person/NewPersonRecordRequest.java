@@ -1,5 +1,6 @@
 package com.acompletenoobsmoke.refresher.person;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -14,12 +15,15 @@ public class NewPersonRecordRequest {
     public final int age;
     @NotNull
     public final Gender gender;
+    @Email(message = "Format email BUSTA!")
+    public final String email;
 
-    public NewPersonRecordRequest(Integer id, String firstName, String lastName, int age, Gender gender) {
+    public NewPersonRecordRequest(String firstName, String lastName, int age, Gender gender, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.gender = gender;
+        this.email = email;
     }
 
     public Gender getGender() {
@@ -38,6 +42,8 @@ public class NewPersonRecordRequest {
         return firstName;
     }
 
+    public String getEmail() { return  email; }
+
 
     public String getProfile() {
         return toString();
@@ -50,6 +56,7 @@ public class NewPersonRecordRequest {
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
                 ", gender=" + gender +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

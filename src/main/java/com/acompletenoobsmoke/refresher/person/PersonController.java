@@ -37,8 +37,8 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> addPerson(@RequestBody NewPersonRecordRequest person) {
-        validator.validate(person);
+    public ResponseEntity<Object> addPerson(@Valid @RequestBody NewPersonRecordRequest person) {
+        //validator.validate(person);
         personService.addPerson(person);
         String message = person.getFirstName() + " " + person.getLastName() + " added successfully!";
         return new ResponseEntity<>(message, HttpStatus.OK);
