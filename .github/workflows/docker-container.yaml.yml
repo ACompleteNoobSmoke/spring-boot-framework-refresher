@@ -1,6 +1,6 @@
-name: docker-container.yaml
+name: Docker Container
 
-run-name: Docker Compose -- ${{inputs.version}}
+run-name: Docker Container -- ${{inputs.version}}
 
 on:
   workflow_dispatch:
