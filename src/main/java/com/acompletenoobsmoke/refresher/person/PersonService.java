@@ -1,8 +1,10 @@
 package com.acompletenoobsmoke.refresher.person;
 
+import com.acompletenoobsmoke.refresher.exception.ResourceNotFoundException;
 import com.acompletenoobsmoke.refresher.util.SORT;
 import org.springframework.stereotype.Service;
 
+import java.lang.module.ResolutionException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +25,7 @@ public class PersonService {
     }
 
     public List<Person> getPeople(String sort) {
-        SORT sortecChoice = (sort != null && sort.toUpperCase().equals("DESC")) ? SORT.DESC : SORT.ASC;
+        SORT sortecChoice = (sort != null && sort.equalsIgnoreCase("DESC")) ? SORT.DESC : SORT.ASC;
         if (sortecChoice == SORT.DESC) {
             return getPeople().stream().sorted(Comparator.comparing(Person::getId).reversed()).collect(Collectors.toList());
         }
@@ -40,7 +42,7 @@ public class PersonService {
 
     public Person getPersonByID(Integer id) {
         return personDAO.getPerson(id).orElseThrow(() ->
-                new IllegalArgumentException("No person found with id: " + id));
+                new ResourceNotFoundException("No person found with id: " + id));
     }
 
     public void removePersonByID(Integer id) {

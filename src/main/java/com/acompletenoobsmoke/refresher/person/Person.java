@@ -6,13 +6,15 @@ public class Person {
     public final String lastName;
     public final int age;
     public final Gender gender;
+    public final String email;
 
-    public Person(Integer id, String firstName, String lastName, int age, Gender gender) {
+    public Person(Integer id, String firstName, String lastName, int age, Gender gender, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.gender = gender;
+        this.email = email;
     }
 
     public Gender getGender() {
@@ -35,6 +37,10 @@ public class Person {
         return id;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public String getProfile() {
         return toString();
     }
@@ -47,6 +53,7 @@ public class Person {
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
                 ", gender=" + gender +
+                ", email='" + email + '\'' +
                 '}';
     }
 }
