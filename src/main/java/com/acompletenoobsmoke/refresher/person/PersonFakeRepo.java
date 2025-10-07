@@ -32,7 +32,7 @@ public class PersonFakeRepo implements PersonDAO{
     }
 
     @Override
-    public void insertPerson(Person person) {
+    public void insertPerson(NewPersonRecordRequest person) {
         people.add(new Person(id.incrementAndGet(), person.getFirstName(),
                 person.getLastName(), person.getAge(), person.getGender()));
     }

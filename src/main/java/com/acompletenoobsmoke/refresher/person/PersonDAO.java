@@ -7,7 +7,7 @@ public interface PersonDAO {
 
     public List<Person> getPeople();
     public Optional<Person> getPerson(Integer id);
-    public void insertPerson(Person person);
+    public void insertPerson(NewPersonRecordRequest person);
     public void removePerson(Integer id);
     public Optional<Person> updatePerson(int id, Person person);
 }

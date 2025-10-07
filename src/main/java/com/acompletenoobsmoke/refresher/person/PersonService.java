@@ -30,7 +30,7 @@ public class PersonService {
         return getPeople().stream().sorted(Comparator.comparing(Person::getId)).collect(Collectors.toList());
     }
 
-    public void addPerson(Person person) {
+    public void addPerson(NewPersonRecordRequest person) {
         personDAO.insertPerson(person);
     }
 

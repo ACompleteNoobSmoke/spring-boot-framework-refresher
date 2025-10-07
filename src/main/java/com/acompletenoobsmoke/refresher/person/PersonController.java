@@ -1,6 +1,7 @@
 package com.acompletenoobsmoke.refresher.person;
 
 import com.acompletenoobsmoke.refresher.util.SORT;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,12 +24,12 @@ public class PersonController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Person> getPersonById(@PathVariable Integer id) {
+    public ResponseEntity<Person> getPersonById(@Valid @PathVariable Integer id) {
         return new ResponseEntity<>(personService.getPersonByID(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Object> addPerson(@RequestBody Person person) {
+    public ResponseEntity<Object> addPerson(@Valid @RequestBody NewPersonRecordRequest person) {
         personService.addPerson(person);
         String message = person.getFirstName() + " " + person.getLastName() + " added successfully!";
         return new ResponseEntity<>(message, HttpStatus.OK);
