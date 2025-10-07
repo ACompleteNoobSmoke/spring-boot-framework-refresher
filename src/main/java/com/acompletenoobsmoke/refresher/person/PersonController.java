@@ -27,8 +27,13 @@ public class PersonController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Person> getPersonById(@PathVariable Integer id) {
-        return new ResponseEntity<>(personService.getPersonByID(id), HttpStatus.OK);
+    public ResponseEntity<Object> getPersonById(@PathVariable Integer id) {
+        try {
+            return new ResponseEntity<>(personService.getPersonByID(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+
     }
 
     @PostMapping
