@@ -1,0 +1,45 @@
+name: Post-Build
+
+run-name: Post-Build Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      repo:
+        type: choice
+        required: true
+        options:
+          - -- SELECT --
+          - maven-snapshots
+          - maven-releases
+        description: Nexus Repo
+
+jobs:
+  post-build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Java
+        uses: actions/setup-java@v5
+        with:
+          java-version: 25
+          distribution: zulu
+
+      - name: Maven Settings File
+        uses: whelk-io/maven-settings-xml-action@v22
+        with:
+            servers: '[{"id": "${{ steps.is_tag.outputs.NEXUS_REPO_ID }}", "username": "${{secrets.NEXUS_USERNAME}}", "password": "${{secrets.NEXUS_PASSWORD}}"}]'
+            profiles: '[{"id": "nexus-profile", "properties": {"altDeploymentRepository": "${{  inputs.repo  }}::${{ secrets.NEXUS_URL }}/repository/${{ inputs.repo }}"}}]'
+            active_profiles: '["nexus-profile"]'
+            output_file: .m2/settings.xml
+
+      - name: Maven Build
+        run: mvn clean install -q -Dspring.profiles.active=DEV
+
+      - name: Deploy To Nexus
+        run: | 
+          mvn deploy --batch-mode \
+          -s '/home/runner/work/${{github.event.repository.name}}/${{github.event.repository.name}}/.m2/settings.xml'\
+          -DrepositoryId='${{ inputs.repo  }}' \
