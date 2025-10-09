@@ -30,7 +30,7 @@ jobs:
       - name: Maven Settings File
         uses: whelk-io/maven-settings-xml-action@v22
         with:
-            servers: '[{"id": "${{ steps.is_tag.outputs.NEXUS_REPO_ID }}", "username": "${{secrets.NEXUS_USERNAME}}", "password": "${{secrets.NEXUS_PASSWORD}}"}]'
+            servers: '[{"id": "${{ inputs.repo }}", "username": "${{secrets.NEXUS_USERNAME}}", "password": "${{secrets.NEXUS_PASSWORD}}"}]'
             profiles: '[{"id": "nexus-profile", "properties": {"altDeploymentRepository": "${{  inputs.repo  }}::${{ secrets.NEXUS_URL }}/repository/${{ inputs.repo }}"}}]'
             active_profiles: '["nexus-profile"]'
             output_file: .m2/settings.xml
