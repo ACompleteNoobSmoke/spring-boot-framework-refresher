@@ -1,6 +1,7 @@
 FROM openjdk:25 AS build
 WORKDIR /app
 COPY .mvn/ .mvn
+COPY .env .env
 COPY mvnw pom.xml ./
 RUN chmod +x ./mvnw
 RUN ./mvnw dependency:go-offline
