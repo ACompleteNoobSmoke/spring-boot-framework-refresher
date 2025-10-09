@@ -41,6 +41,7 @@ jobs:
       - name: Deploy To Nexus
         run: | 
           mvn deploy \
+          -Dspring.profiles.active=DEV
           --batch-mode \
           -DrepositoryId='${{ inputs.repo  }}' \
           -s '/home/runner/work/${{github.event.repository.name}}/${{github.event.repository.name}}/.m2/settings.xml'
