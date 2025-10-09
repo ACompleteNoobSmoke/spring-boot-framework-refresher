@@ -1,5 +1,13 @@
 version: '3.8'
 services:
+  nexus:
+    image: sonatype/nexus3
+    container_name: based_nexus
+    volumes:
+      - nexus_data
+    ports:
+      - "8081:8081"
+
   app:
     build:
       context: .
@@ -20,6 +28,7 @@ services:
 
 volumes:
   db_data:
+  nexus_data:
 
 
 
