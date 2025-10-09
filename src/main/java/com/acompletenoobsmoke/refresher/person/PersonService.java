@@ -2,51 +2,24 @@ package com.acompletenoobsmoke.refresher.person;
 
 import com.acompletenoobsmoke.refresher.exception.ResourceNotFoundException;
 import com.acompletenoobsmoke.refresher.util.SORT;
-import org.springframework.stereotype.Service;
 
-import java.lang.module.ResolutionException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+public interface PersonService {
 
-@Service
-public class PersonService {
+    List<Person> getPeople();
 
-    private final PersonDAO personDAO;
+    List<Person> getPeople(String sort);
 
-    public PersonService(PersonDAO personDAO) {
-        this.personDAO = personDAO;
-    }
+    void addPerson(NewPersonRecordRequest person);
 
-    private List<Person> getPeople() {
-        return personDAO.getPeople();
-    }
+    Optional<Person> updatePerson(int id, Person person);
 
-    public List<Person> getPeople(String sort) {
-        SORT sortecChoice = (sort != null && sort.equalsIgnoreCase("DESC")) ? SORT.DESC : SORT.ASC;
-        if (sortecChoice == SORT.DESC) {
-            return getPeople().stream().sorted(Comparator.comparing(Person::getId).reversed()).collect(Collectors.toList());
-        }
-        return getPeople().stream().sorted(Comparator.comparing(Person::getId)).collect(Collectors.toList());
-    }
+    Person getPersonByID(Integer id);
 
-    public void addPerson(NewPersonRecordRequest person) {
-        personDAO.insertPerson(person);
-    }
-
-    public Optional<Person> updatePerson(int id, Person person) {
-        return personDAO.updatePerson(id, person);
-    }
-
-    public Person getPersonByID(Integer id) {
-        return personDAO.getPerson(id).orElseThrow(() ->
-                new ResourceNotFoundException("No person found with id: " + id));
-    }
-
-    public void removePersonByID(Integer id) {
-        personDAO.removePerson(id);
-    }
+    void removePersonByID(Integer id);
 
 }

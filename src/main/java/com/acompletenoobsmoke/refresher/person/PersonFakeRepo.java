@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Repository
+@Repository("fake-people-repo")
 public class PersonFakeRepo implements PersonDAO{
 
     private static final List<Person> people = new ArrayList<>();
