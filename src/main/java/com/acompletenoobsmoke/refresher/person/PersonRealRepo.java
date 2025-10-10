@@ -1,5 +1,6 @@
 package com.acompletenoobsmoke.refresher.person;
 
+import com.acompletenoobsmoke.refresher.exception.ResourceExistsException;
 import com.acompletenoobsmoke.refresher.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -31,7 +32,9 @@ public class PersonRealRepo implements PersonDAO {
 
     @Override
     public void insertPerson(NewPersonRecordRequest person) {
-        System.out.println(person.toString());
+        if (personRepository.existsByEmail(person.getEmail())) {
+            throw new ResourceExistsException("Person with email " + person.getEmail() + " already exists");
+        }
         personRepository.save(new Person(person.getFirstName(),
                 person.getLastName(), person.getAge(), person.getGender(),
                 person.getEmail()));
