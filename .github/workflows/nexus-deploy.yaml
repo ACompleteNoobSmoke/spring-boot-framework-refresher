@@ -3,7 +3,7 @@ name: Nexus Deploy Pipeline
 run-name: Nexus Deploy Pipeline -- ${{github.ref_name}}
 
 on:
-  workflow_dispatch:
+  push:
 
 jobs:
   nexus-deploy:
