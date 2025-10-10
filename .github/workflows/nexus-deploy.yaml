@@ -27,12 +27,12 @@ jobs:
           output_file: .m2/settings.xml
 
       - name: Maven Build
-        run: mvn clean install -q -Dspring.profile.active=DEV
+        run: mvn clean install -q -Dspring.profiles.active=DEV
 
       - name: Deploy to Nexus
         run: |
           mvn deploy \
-          -Dspring.profile.active=DEV \
+          -Dspring.profiles.active=DEV \
           --batch-mode \
           -DrepositoryId='maven-snapshots' \
           -s '/home/runner/work/${{github.event.repository.name}}/${{github.event.repository.name}}/.m2/settings.xml'
