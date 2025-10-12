@@ -7,8 +7,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
+
+import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
+@EnableScheduling
 public class RefresherApplication {
 
     public static void main(String[] args) {
@@ -24,6 +29,23 @@ public class RefresherApplication {
         return args -> {
 
         };
+    }
+
+    @Scheduled(
+            fixedRate = 10,
+            timeUnit = TimeUnit.SECONDS
+    )
+    public void sendEmails() throws InterruptedException {
+        System.out.println("Start Sending Emails");
+        Thread.sleep(2000);
+        System.out.println("End Sending Emails");
+    }
+
+    @Scheduled(cron = "*/5 * * * * *")
+    public void generateSalesReports() throws InterruptedException {
+        System.out.println("Start Generating Sales Reports");
+        Thread.sleep(5000);
+        System.out.println("End Generating Sales Reports");
     }
 
 }
