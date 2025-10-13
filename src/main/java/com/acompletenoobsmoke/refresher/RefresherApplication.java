@@ -21,6 +21,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import static org.hibernate.sql.ast.SqlTreeCreationLogger.LOGGER;
+
+
 @SpringBootApplication
 @EnableScheduling
 @EnableAsync
@@ -31,6 +34,9 @@ public class RefresherApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(RefresherApplication.class, args);
+        System.out.println("Hello World");
+        LOGGER.info("Hello World -- ACompleteNoobSmoke Logger");
+        LOGGER.warn("Hello World -- ACompleteNoobSmoke Logger (Warning)");
     }
 
     public Set<String> getAllApplicationPropertyKeys(ConfigurableEnvironment environment) {
