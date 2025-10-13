@@ -23,4 +23,4 @@ jobs:
           distribution: zulu
 
       - name: Build Project
-        run: mvn clean install -q -Dspring.profiles.active=DEV
+        run: mvn clean install -q -Dspring.profiles.active=dev

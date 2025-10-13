@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 
 @Service
-@Profile("DEV")
+@Profile("dev")
 public class FakePersonService implements PersonService {
 
     private final PersonDAO personDAO;

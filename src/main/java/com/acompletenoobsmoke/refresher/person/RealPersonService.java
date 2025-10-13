@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 
 @Service
-@Profile("PROD")
+@Profile("prod")
 public class RealPersonService implements PersonService {
 
     private final PersonDAO personDAO;
